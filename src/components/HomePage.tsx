@@ -3,15 +3,12 @@ import { useDispatch } from "react-redux"
 import { useAuth } from "../hooks/useAuth"
 import { Navigate } from "react-router-dom"
 import { removeUser } from "../store/slices/userSlice"
+import { useAppDispatch } from "../hooks/redux-hooks"
 
 const HomePage = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const {isAuth, email, token, id} = useAuth()
 
-    
-    // useEffect(() => {
-    //     navigate('/login')
-    // }, [])
     return isAuth 
         ? (
             <div>

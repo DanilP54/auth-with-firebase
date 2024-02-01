@@ -4,18 +4,24 @@ import Form from "./Form"
 import { useDispatch } from "react-redux"
 import { setUser } from "../store/slices/userSlice";
 
+
 const RegisterPage = () => {
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
-    const handleRegister = (email, password) => {
+    const handleRegister = (email: string, password: string) => {
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
+            .then(res => {
+                console.log(res)
+                return res
+                
+            })
             .then(({user}) => {
                 dispatch(setUser({
                     email: user.email,
-                    token: user.accessToken,
+                    token: user.refreshToken,
                     id: user.uid,
                 }))
                 navigate('/')
