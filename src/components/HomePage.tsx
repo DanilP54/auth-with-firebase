@@ -12,10 +12,8 @@ const HomePage = () => {
     return isAuth 
         ? (
             <div>
-                <p>Ваша почта: {email}</p>
-                <p>Ваша почта: {token}</p>
-                <p>Ваша почта: {id}</p>
-                <button onClick={() => dispatch(removeUser())}>Log out</button>
+                <h1>Welcome</h1>
+                <button onClick={() => dispatch(removeUser())}>Log out {email}</button>
             </div>
         )
         : (

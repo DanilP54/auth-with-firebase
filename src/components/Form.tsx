@@ -5,24 +5,38 @@ interface FormProps {
     handleClick: (email: string, password: string) => void
 }
 
+type StateType<T> = {
+    email: T,
+    password: T
+}
+
 const Form: FC<FormProps> = ({title, handleClick}) => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    
+    const [state, setState] = useState<StateType<string>>({
+        email: '',
+        password: ''
+    })
+    function changeState(e: React.InvalidEvent<HTMLInputElement>) {
+         setState({
+            ...state,
+            [e.target.type]: e.target.value
+        })
+    }
     return (
         <div>
             <input 
                 type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={state.email}
+                onChange={changeState}
                 placeholder="email"    
             />
             <input 
                 type="password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={state.password}
+                onChange={changeState}
                 placeholder="password"    
             />
-            <button onClick={() => handleClick(email, password)}>
+            <button onClick={() => handleClick(state.email, state.password)}>
                 {title}                
             </button>
         </div>
