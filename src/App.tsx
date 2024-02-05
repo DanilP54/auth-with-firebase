@@ -1,13 +1,7 @@
 import './App.css'
 import { useRoutes } from 'react-router-dom'
 import HomePage from './components/HomePage'
-import LoginPage from './components/LoginPage'
-import RegisterPage from './components/RegisterPage'
-
-
-
-
-
+import FormContainer from './components/FormContainer'
 
 
 function App() {
@@ -18,12 +12,8 @@ function App() {
     }, 
     {
       path: '/login', 
-      element: <LoginPage />
+      element: <FormContainer />
     }, 
-    {
-      path: '/register', 
-      element: <RegisterPage />
-    }
   ])
   return elements
 }

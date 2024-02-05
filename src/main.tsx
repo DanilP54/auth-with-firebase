@@ -6,12 +6,15 @@ import './index.css'
 import { Provider } from 'react-redux'
 import { store } from './store/slices/index'
 import './FIREBASE'
+import ThemeProviderComponents from './theme-provider/ThemeProviderComponent'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <ThemeProviderComponents>
+          <App />
+        </ThemeProviderComponents>
       </Provider>
     </BrowserRouter>
 
