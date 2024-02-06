@@ -18,9 +18,10 @@ const FormContainer = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const handleClick = (email: string, password: string, mode: Mode) => {
+    const handleClick = (email: string, password: string, mode: Mode, setLoading: (arg: boolean) => void) => {
         useAuthFirebase(email, password, mode)
             .then(({ user }) => {
+                setLoading(false)
                 dispatch(setUser({
                     email: user.email,
                     token: user.refreshToken,
@@ -29,6 +30,7 @@ const FormContainer = () => {
                 navigate('/')
             })
             .catch(error => {
+                setLoading(false)
                 console.log(error.code);
 
             })

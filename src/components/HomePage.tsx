@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom"
 import { removeUser } from "../store/slices/userSlice"
 import { useAppDispatch } from "../hooks/redux-hooks"
 import myGif from '../assets/images/gifka.gif'
-import {useEffect} from "react";
+
 
 
 const HomePage = () => {
@@ -14,7 +14,7 @@ const HomePage = () => {
         ?
         (
         <div>
-            <h1 className='font-Holtwood mb-2 text-3xl text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-500'>Welcome</h1>
+            <h1 className='font-Holtwood mb-2 text-3xl text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-500'>THE MEME</h1>
             <div className='w-[500px] h-[500px] flex flex-col backdrop-blur-2xl rounded-sm overflow-hidden'>
 
                 <div className="w-full h-full">

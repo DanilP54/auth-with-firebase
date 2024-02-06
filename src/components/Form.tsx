@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react"
+import {Spiner} from "./spiner/Spiner";
 
-import { Input, Button, Typography } from "@material-tailwind/react";
 import { useForm, SubmitHandler } from "react-hook-form"
 
 
@@ -9,26 +9,27 @@ import { useForm, SubmitHandler } from "react-hook-form"
 
 interface FormProps {
     mode: 'Sign In' | 'Sign Up'
-    handleClick: (email: string, password: string, mode: 'Sign In' | 'Sign Up') => void
+    handleClick: (email: string, password: string, mode: "Sign In" | "Sign Up", setLoading: (value: (((prevState: boolean) => boolean) | boolean)) => void) => void
 }
 
-type StateType<T> = {
-    email: T,
-    password: T
+type StateType = {
+    email: string,
+    password: string
 }
 
 
 const Form: FC<FormProps> = ({ mode, handleClick }) => {
     
     const [isLoading, setLoading] = useState(false)
-    const [state, setState] = useState<StateType<string>>({
+    const [state, setState] = useState<StateType>({
         email: '',
         password: ''
     })
 
 
     const handleSubmit = () => {
-        handleClick(state.email, state.password, mode)
+        setLoading(true)
+        handleClick(state.email, state.password, mode, setLoading)
     }
 
 
@@ -43,7 +44,6 @@ const Form: FC<FormProps> = ({ mode, handleClick }) => {
             <div
                 className='group relative h-10 w-full after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:h-[1px] after:opacity-80 after:w-full'>
                 <input
-                    required
                     id='input-email'
                     type='email'
                     name={'email'}
@@ -58,7 +58,6 @@ const Form: FC<FormProps> = ({ mode, handleClick }) => {
             <div
                 className='group relative h-10 w-full after:content-[""] after:bg-black after:absolute after:bottom-0 after:left-0 after:h-[1px] after:border-black after:opacity-80 after:w-full'>
                 <input
-                    required
                     id='input-password'
                     type='password'
                     name='password'
@@ -73,9 +72,14 @@ const Form: FC<FormProps> = ({ mode, handleClick }) => {
             </div>
             <button
                 type='button'
-                className='h-11 border border-black font-Blinker font-bold text-sm shadow-lg shadow-blue-500/10  bg-orange-700 opacity-70  hover:bg-orange-900 transition duration-300'
+                className='h-11 border border-black hover:border-2 font-Blinker font-bold text-sm shadow-lg shadow-blue-500/10  bg-orange-700 opacity-70  hover:bg-orange-900 transition duration-300'
                 onClick={handleSubmit}
-            >{mode.toLocaleUpperCase()}</button>
+            >
+                {
+                isLoading ? <Spiner />
+                : mode.toUpperCase()
+                }
+            </button>
         </form>
     )
 }
