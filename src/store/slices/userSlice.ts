@@ -11,6 +11,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, { payload }) {
+            console.log(payload)
             return {
                 ...state, 
                 email: payload.email,

@@ -4,7 +4,7 @@ import { useAuthFirebase } from "../hooks/useAuthFirebase"
 import { useNavigate } from "react-router-dom"
 import { setUser } from "../store/slices/userSlice"
 import { useAppDispatch } from "../hooks/redux-hooks"
-import ThemeProviderComponents from "../theme-provider/ThemeProviderComponent"
+import myGif from "../assets/images/gifka.gif"
 
 
 export const DEFAULT_MODE: 'Sign In' = 'Sign In'
@@ -35,9 +35,10 @@ const FormContainer = () => {
     }
     
     return (
-        <div className='w-[500px] h-[500px] flex flex-col backdrop-blur-2xl p-8 rounded-sm overflow-hidden'>
-            
-            <h1 className='font-Holtwood text-3xl text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-500'>{mode}</h1>
+        <div className='w-[500px] h-[500px] flex flex-col backdrop-blur-2xl p-8 rounded-sm overflow-hidden relative z-10'>
+            <img src={myGif} alt="gif" className='absolute top-0 w-[500px] h-[500px] z-0 left-0 blur-3xl opacity-30'/>
+            <h1 className='font-Holtwood text-3xl text-center text-yellow-800'>{mode}</h1>
+            <p className='font-Holtwood text-lg text-center text-yellow-800'>if you want to see the meme</p>
             <Form mode={mode} handleClick={handleClick} />
             {
                 mode === DEFAULT_MODE
