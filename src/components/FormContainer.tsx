@@ -14,6 +14,7 @@ export type Mode = typeof REGISTER_MODE | typeof DEFAULT_MODE
 const FormContainer = () => {
     
     let [mode, setMode] = React.useState<Mode>(DEFAULT_MODE)
+    let [error, setError] = React.useState(false)
     
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -30,9 +31,10 @@ const FormContainer = () => {
                 navigate('/')
             })
             .catch(error => {
-                setLoading(false)
                 console.log(error.code);
-
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }
     
@@ -63,7 +65,6 @@ const FormContainer = () => {
                         </span>
                     </span>
             }
-
         </div>
     )
 }
