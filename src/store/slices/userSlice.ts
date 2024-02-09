@@ -16,7 +16,8 @@ const userSlice = createSlice({
                 ...state, 
                 email: payload.email,
                 token: payload.token,
-                id: payload.id
+                id: payload.id,
+                isAuth: payload.isAuth
             }
         }, 
         removeUser(state) {

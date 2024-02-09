@@ -1,16 +1,22 @@
 import { useAuth } from "../hooks/useAuth"
 import { Navigate } from "react-router-dom"
-import { removeUser } from "../store/slices/userSlice"
+import { removeUser, setUser } from "../store/slices/userSlice"
 import { useAppDispatch } from "../hooks/redux-hooks"
 import myGif from '../assets/images/gifka.gif'
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { getAuth, onAuthStateChanged, signInWithCredential } from "firebase/auth"
+
 
 
 
 const HomePage = () => {
     const dispatch = useAppDispatch()
-    const {isAuth, email} = useAuth()
-
-    return isAuth
+    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
+    const { email} = useAuth()
+    
+    return isLoading
         ?
         (
         <div>

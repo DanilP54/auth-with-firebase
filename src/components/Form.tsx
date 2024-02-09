@@ -24,6 +24,7 @@ const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
         email: '',
         password: ''
     })
+    const [typeInput, setTypeInput] = useState('password')
 
     // let { value, pattern} = useGeneratePassword()
 
@@ -44,12 +45,11 @@ const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
         }
 
         if (pattern.test(value)) {
-            if(state.password) {
-                setState({
-                    ...state,
-                    password: ''
-                })
-            }
+            setTypeInput('text')
+            setState({
+                ...state,
+                password: value
+            })
         }
     }
 
@@ -94,8 +94,8 @@ const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
                         minLength={6}
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         id='input-password'
-                        type='password'
-                        name='password'
+                        type={typeInput}
+                        name={typeInput}
                         value={state.password}
                         placeholder='Password'
                         className='bg-transparent outline-none w-2/3 h-full placeholder:text-sm placeholder:text-gray-900 placeholder:opacity-80'

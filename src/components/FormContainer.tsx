@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom"
 import { setUser } from "../store/slices/userSlice"
 import { useAppDispatch } from "../hooks/redux-hooks"
 import myGif from "../assets/images/gifka.gif"
+import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
+import firebase from "firebase/auth";
+import { local, registerUser } from "../FIREBASE"
 
 
 export const DEFAULT_MODE: 'Sign In' = 'Sign In'
@@ -19,23 +22,35 @@ const FormContainer = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
+
+    
     const handleClick = (email: string, password: string, mode: Mode, setLoading: (arg: boolean) => void) => {
-        useAuthFirebase(email, password, mode)
-            .then(({ user }) => {
-                setLoading(false)
-                dispatch(setUser({
-                    email: user.email,
-                    token: user.refreshToken,
-                    id: user.uid,
-                }))
-                navigate('/')
+        
+        registerUser(email, password)
+            .then(res => {
+                console.log(res);
+                
             })
-            .catch(error => {
-                console.log(error.code);
+            .catch(err => {
+                console.log(err);
+                
             })
-            .finally(() => {
-                setLoading(false)
-            })
+
+        // useAuthFirebase(email, password, mode)
+        //     .then(({ user }) => {
+        //         dispatch(setUser({
+        //             email: user.email,
+        //             token: user.refreshToken,
+        //             id: user.uid,
+        //         }))
+        //         navigate('/')
+        //     })
+        //     .catch(error => {
+        //         console.dir(error);
+        //     })
+        //     .finally(() => {
+        //         setLoading(false)
+        //     })
     }
     
     return (
@@ -55,7 +70,6 @@ const FormContainer = () => {
                             >&nbsp;{REGISTER_MODE}
                         </span>
                     </span>
-                    
                     : <span className='text-center font-Blinker text-black opacity-80 text-base mt-3'>
                         Already have account?&nbsp; 
                         <span 
