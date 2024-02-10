@@ -14,19 +14,17 @@ const HomePage = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
-    const { email} = useAuth()
+    const { isAuth, email } = useAuth()
     
-    return isLoading
+    return isAuth
         ?
         (
         <div>
             <h1 className='font-Holtwood mb-2 text-3xl text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-yellow-500'>THE MEME</h1>
             <div className='w-[500px] h-[500px] flex flex-col backdrop-blur-2xl rounded-sm overflow-hidden'>
-
                 <div className="w-full h-full">
                     <img className='w-full h-full' src={myGif} alt="gif"/>
                 </div>
-
             </div>
             <button
                 className='h-11 w-full mt-2 bg-amber-700 border border-black font-Blinker font-medium text-base bg-gradient-to-r from-pink-500 to-yellow-500'

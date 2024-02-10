@@ -2,8 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     email: null, 
-    token: null,
-    id: null,
+    idToken: null,
+    refreshToken: null,
+    expiresIn: null,
+    localId: null
 }
 
 const userSlice = createSlice({
@@ -11,13 +13,13 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, { payload }) {
-            console.log(payload)
             return {
                 ...state, 
                 email: payload.email,
-                token: payload.token,
-                id: payload.id,
-                isAuth: payload.isAuth
+                idToken: payload.idToken,
+                refreshToken: payload.refreshToken,
+                expiresIn: payload.expiresIn,
+                localId: payload.localId
             }
         }, 
         removeUser(state) {

@@ -1,15 +1,11 @@
 import React, { useState } from "react"
 import {Spiner} from "./spiner/Spiner";
-import {Mode} from "./FormContainer"
-import {useGeneratePassword} from "../hooks/useGeneratePassword";
+import {Mode} from "./LoginPage"
 // import { useForm, SubmitHandler } from "react-hook-form"
-
-
-
 
 interface FormProps  {
     mode: 'Sign In' | 'Sign Up'
-    handleClick: (email: string, password: string, mode: Mode, setLoading: (value: (((prevState: boolean) => boolean) | boolean)) => void) => void
+    handleClick: (email: string, password: string) => void
 }
 type StateType = {
     email: string,
@@ -19,18 +15,16 @@ type StateType = {
 
 const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
     
-    const [isLoading, setLoading] = useState(false)
+    // const [isLoading, setLoading] = useState(false)
     const [state, setState] = useState<StateType>({
         email: '',
         password: ''
     })
-    const [typeInput, setTypeInput] = useState('password')
-
-    // let { value, pattern} = useGeneratePassword()
-
-
+    const [error,setError] = useState('')
+    const [showType, setShowType] = useState('password')
+ 
     function generatePassword() {
-
+        
         const pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
         let value = '';
 
@@ -45,25 +39,26 @@ const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
         }
 
         if (pattern.test(value)) {
-            setTypeInput('text')
+            setShowType('text')
             setState({
-                ...state,
+                ...state, 
                 password: value
             })
         }
     }
-
-
     const handleSubmit = () => {
-        setLoading(true)
-        handleClick(state.email, state.password, mode, setLoading)
+        handleClick(state.email, state.password)
     }
+    
     function changeState(e: React.InvalidEvent<HTMLInputElement>) {
         setState({
             ...state,
             [e.target.type]: e.target.value
         })
     }
+    
+    
+    
     return (
         <>
             <form className='mt-20 flex flex-col gap-9'>
@@ -94,8 +89,8 @@ const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
                         minLength={6}
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         id='input-password'
-                        type={typeInput}
-                        name={typeInput}
+                        type={showType}
+                        name={showType}
                         value={state.password}
                         placeholder='Password'
                         className='bg-transparent outline-none w-2/3 h-full placeholder:text-sm placeholder:text-gray-900 placeholder:opacity-80'
@@ -112,10 +107,11 @@ const Form: React.FC<FormProps> = ({ mode, handleClick }) => {
                     className='h-11 border-2 border-black font-Blinker font-bold text-sm shadow-lg shadow-blue-500/10  bg-orange-700 opacity-70  hover:bg-orange-900 transition duration-300'
                     onClick={handleSubmit}
                 >
-                    {
+                    {/* {
                         isLoading ? <Spiner/>
                             : mode.toUpperCase()
-                    }
+                    } */}
+                    {mode.toUpperCase()}
                 </button>
 
             </form>

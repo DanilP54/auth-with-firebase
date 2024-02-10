@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { Mode } from "../components/FormContainer";
-import { DEFAULT_MODE, REGISTER_MODE } from "../components/FormContainer";
+import { Mode } from "../components/LoginPage";
+import { DEFAULT_MODE, REGISTER_MODE } from "../components/LoginPage";
 
 
 
